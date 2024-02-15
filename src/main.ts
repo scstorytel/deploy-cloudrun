@@ -179,7 +179,7 @@ export async function run(): Promise<void> {
         }
       }
     } else if (useJob) {
-      cmd = ['run', 'jobs', 'update', job, '--quiet'];
+      cmd = ['run', 'jobs', 'deploy', job];
 
       if (image) {
         // Deploy job with image specified
