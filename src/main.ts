@@ -212,10 +212,10 @@ export async function run(): Promise<void> {
       // Set optional flags from inputs
       const compiledEnvVars = parseKVStringAndFile(envVars, envVarsFile);
       if (compiledEnvVars && Object.keys(compiledEnvVars).length > 0) {
-        cmd.push('--update-env-vars', kvToString(compiledEnvVars));
+        cmd.push('--set-env-vars', kvToString(compiledEnvVars));
       }
       if (secrets && Object.keys(secrets).length > 0) {
-        cmd.push('--update-secrets', kvToString(secrets));
+        cmd.push('--set-secrets', kvToString(secrets));
       }
       if (tag) {
         cmd.push('--tag', tag);
@@ -228,7 +228,7 @@ export async function run(): Promise<void> {
       const defLabels = skipDefaultLabels ? {} : defaultLabels();
       const compiledLabels = Object.assign({}, defLabels, labels);
       if (compiledLabels && Object.keys(compiledLabels).length > 0) {
-        cmd.push('--update-labels', kvToString(compiledLabels));
+        cmd.push('--labels', kvToString(compiledLabels));
       }
     }
 
