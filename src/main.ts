@@ -179,7 +179,7 @@ export async function run(): Promise<void> {
         }
       }
     } else if (useJob) {
-      cmd = ['run', 'jobs', 'update', job, '--quiet'];
+      cmd = ['run', 'jobs', 'deploy', job, '--quiet'];
 
       if (image) {
         // Deploy job with image specified
@@ -189,15 +189,15 @@ export async function run(): Promise<void> {
       // Set optional flags from inputs
       const compiledEnvVars = parseKVStringAndFile(envVars, envVarsFile);
       if (compiledEnvVars && Object.keys(compiledEnvVars).length > 0) {
-        cmd.push('--update-env-vars', kvToString(compiledEnvVars));
+        cmd.push('--set-env-vars', kvToString(compiledEnvVars));
       }
       if (secrets && Object.keys(secrets).length > 0) {
-        cmd.push('--update-secrets', kvToString(secrets));
+        cmd.push('--set-secrets', kvToString(secrets));
       }
 
       // Compile the labels
       const compiledLabels = Object.assign({}, defaultLabels(), labels);
-      cmd.push('--update-labels', kvToString(compiledLabels));
+      cmd.push('--labels', kvToString(compiledLabels));
     } else {
       cmd = ['run', 'deploy', service, '--quiet'];
 
